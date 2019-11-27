@@ -29,13 +29,18 @@ Num: ast::Expr = {
 
 
 pub Func: ast::Func = {
-  "fn" <fname:Ident> "(" <pdecls:CommaSeparated<ParamDecl>> ")" <rt:ReturnType?> "{"
+  "fn" <fname:Ident> <pdecls:ParameterList> <rt:ReturnType?> "{"
   <stmts:StatementList> "}" => ast::Func {
     name: fname,
     params: pdecls,
     ret_type: rt,
     body: stmts,
   }
+}
+
+ParameterList: Vec<ast::ParamDecl> = {
+  "()" => Vec::new(),
+  "(" <pdecls:CommaSeparated<ParamDecl>> ")" => pdecls,
 }
 
 
