@@ -36,3 +36,13 @@ pub enum Op {
 
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub struct Ident(pub String);
+
+
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
+pub enum Decl {
+    Let(Ident, Expr)
+}
+
+pub struct Func(pub Ident, pub Vec<Statement>);
+
+pub struct Statement;

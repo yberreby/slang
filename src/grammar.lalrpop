@@ -26,3 +26,13 @@ Num: ast::Expr = {
         ast::Expr::Num(i32::from_str_radix(&num, 16).unwrap())
     },
 };
+
+
+Func: ast::Func = {
+  "fn" <fname:Ident> "(" ")" "{" <stmts:Statement+> "}" => ast::Func(fname,
+  stmts)
+}
+
+Statement: ast::Statement = {
+  "();" => ast::Statement
+}
