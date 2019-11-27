@@ -29,7 +29,8 @@ Num: ast::Expr = {
 
 
 pub Func: ast::Func = {
-  "fn" <fname:Ident> "(" ")" "{" <stmts:StatementList> "}" => ast::Func(fname,
+  "fn" <fname:Ident> "(" <pdecls:CommaSeparated<ParamDecl>> ")" "{"
+  <stmts:StatementList> "}" => ast::Func(fname, pdecls,
   stmts)
 }
 
@@ -39,4 +40,22 @@ StatementList: Vec<ast::Statement> = {
 
 Statement: ast::Statement = {
   "()" => ast::Statement::Empty
+}
+
+CommaSeparated<T>: Vec<T> = {
+    <v:(<T> ",")*> <e:T?> => match e {
+        None => v,
+        Some(e) => {
+            let mut v = v;
+            v.push(e);
+            v
+        }
+    }
+};
+
+ParamDecl: ast::ParamDecl = {
+  <name:Ident> ":" <typ:Ident> => ast::ParamDecl {
+    name: name,
+    typ: typ
+  }
 }
