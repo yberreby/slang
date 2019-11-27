@@ -29,9 +29,18 @@ Num: ast::Expr = {
 
 
 pub Func: ast::Func = {
-  "fn" <fname:Ident> "(" <pdecls:CommaSeparated<ParamDecl>> ")" "{"
-  <stmts:StatementList> "}" => ast::Func(fname, pdecls,
-  stmts)
+  "fn" <fname:Ident> "(" <pdecls:CommaSeparated<ParamDecl>> ")" <rt:ReturnType?> "{"
+  <stmts:StatementList> "}" => ast::Func {
+    name: fname,
+    params: pdecls,
+    ret_type: rt,
+    body: stmts,
+  }
+}
+
+
+ReturnType: ast::Ident = {
+  "->" <typ:Ident> => typ
 }
 
 StatementList: Vec<ast::Statement> = {

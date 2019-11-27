@@ -43,7 +43,12 @@ pub enum Decl {
     Let(Ident, Expr)
 }
 
-pub struct Func(pub Ident, pub Vec<ParamDecl>, pub Vec<Statement>);
+pub struct Func {
+    pub name: Ident,
+    pub params: Vec<ParamDecl>,
+    pub ret_type: Option<Ident>,
+    pub body: Vec<Statement>
+}
 
 pub enum Statement {
     Empty
