@@ -1,10 +1,28 @@
 use std::str::FromStr;
+use crate::ast;
 
 grammar;
 
-pub Term: i32 = {
-    <n:Num> => n,
-    "(" <t:Term> ")" => t,
+
+pub Ident: ast::Ident = {
+    r"[a-zA-Z_][0-9A-Za-z_]*" => ast::Ident(<>.to_string()),
 };
 
-Num: i32 = <s:r"[0-9]+"> => i32::from_str(s).unwrap();
+Num: ast::Expr = {
+    r"\d+" => {
+        let num = <>.to_string().replace("_", "");
+        ast::Expr::Num(i32::from_str(<>).unwrap())
+    },
+    r"[0-9]+d[0-9_]+" => {
+        let num = <>.to_string().replace("_", "").splitn(2, 'd').nth(1).unwrap().to_string();
+        ast::Expr::Num(i32::from_str_radix(&num, 10).unwrap())
+    },
+    r"[0-9]+b[01_]+" => {
+        let num = <>.to_string().replace("_", "").splitn(2, 'b').nth(1).unwrap().to_string();
+        ast::Expr::Num(i32::from_str_radix(&num, 2).unwrap())
+    },
+    r"[0-9]+x[0-9a-fA-F_]+" => {
+        let num = <>.to_string().replace("_", "").splitn(2, 'x').nth(1).unwrap().to_string();
+        ast::Expr::Num(i32::from_str_radix(&num, 16).unwrap())
+    },
+};
