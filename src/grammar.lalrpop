@@ -34,7 +34,7 @@ pub Func: ast::Func = {
 }
 
 StatementList: Vec<ast::Statement> = {
-  <stmts:(Statement ";")+> => stmts.into_iter().map(|(stmt, s)| stmt).collect()
+  <stmts:(Statement ";")*> => stmts.into_iter().map(|(stmt, s)| stmt).collect()
 }
 
 Statement: ast::Statement = {
