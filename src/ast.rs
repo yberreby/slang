@@ -45,4 +45,6 @@ pub enum Decl {
 
 pub struct Func(pub Ident, pub Vec<Statement>);
 
-pub struct Statement;
+pub enum Statement {
+    Empty
+}

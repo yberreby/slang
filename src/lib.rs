@@ -5,15 +5,6 @@ pub mod ast;
 lalrpop_mod!(pub grammar); // synthesized by LALRPOP
 
 #[test]
-fn calculator1() {
-    assert!(grammar::TermParser::new().parse("22").is_ok());
-    assert!(grammar::TermParser::new().parse("(22)").is_ok());
-    assert!(grammar::TermParser::new().parse("((((22))))").is_ok());
-    assert!(grammar::TermParser::new().parse("((22)").is_err());
-}
-
-
-#[test]
-fn variable_declarationr() {
-    assert!(grammar::TermParser::new().parse("(22)").is_ok());
+fn trivial_fn_decl() {
+    assert!(grammar::FuncParser::new().parse("fn hello() { (); }").is_ok());
 }

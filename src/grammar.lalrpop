@@ -28,11 +28,15 @@ Num: ast::Expr = {
 };
 
 
-Func: ast::Func = {
-  "fn" <fname:Ident> "(" ")" "{" <stmts:Statement+> "}" => ast::Func(fname,
+pub Func: ast::Func = {
+  "fn" <fname:Ident> "(" ")" "{" <stmts:StatementList> "}" => ast::Func(fname,
   stmts)
 }
 
+StatementList: Vec<ast::Statement> = {
+  <stmts:(Statement ";")+> => stmts.into_iter().map(|(stmt, s)| stmt).collect()
+}
+
 Statement: ast::Statement = {
-  "();" => ast::Statement
+  "()" => ast::Statement::Empty
 }
