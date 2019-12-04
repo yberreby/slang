@@ -32,3 +32,11 @@ fn statement_list_simple_assignment() {
 fn fn_call_no_args() {
     grammar::ExprParser::new().parse("die()").unwrap();
 }
+
+
+#[test]
+fn parse_string_literal() {
+    grammar::ExprParser::new().parse("\"hello world!\"").unwrap();
+}
+
+
