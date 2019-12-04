@@ -1,4 +1,11 @@
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]
+pub enum TopLevel {
+    Statement(Statement),
+
+}
+
+
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub enum Expr {
     Ref(Ident),
     Arith(Op, Box<Expr>, Box<Expr>),
