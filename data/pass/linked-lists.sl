@@ -26,13 +26,23 @@ struct linked_list {
 }
 
 
-fn ll_prepend(ll: *linked_list, new_data: int) -> *linked_list {
-  // This is syntactic sugar for declaration + assignment.
-  let new_ll: *linked_list = ll_init(new_data);
-  // expr->ident is an alias for (*expr).ident
-  new_ll->next = ll;
+/*
+`self.method(a,b,c)`
+is an alias for
 
-  return new_ll;
+`Type::method(self, a, b, c)`
+*/
+
+
+impl linked_list {
+  fn prepend(ll: *linked_list, new_data: i64) -> *linked_list {
+    // This is syntactic sugar for declaration + assignment.
+    let new_ll: *linked_list = ll_init(new_data);
+    // expr->ident is an alias for (*expr).ident
+    new_ll->next = ll;
+
+    return new_ll;
+  }
 }
 
 

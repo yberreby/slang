@@ -48,6 +48,10 @@ Num: ast::Expr = {
     },
 };
 
+StringLiteral: ast::Expr = {
+  r#""[^"]*""# => ast::Expr::StringLiteral(<>.to_string()) 
+}
+
 
 pub Func: ast::Func = {
   "fn" <fname:Ident> <pdecls:ParameterList> <rt:ReturnType?> "{"

@@ -4,6 +4,7 @@ pub enum Expr {
     Arith(Op, Box<Expr>, Box<Expr>),
     Unary(UnaryOp, Box<Expr>),
     Num(i32),
+    StringLiteral(String),
     FnCall(Ident, Vec<Expr>),
 }
 
