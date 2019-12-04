@@ -1,7 +1,7 @@
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub enum TopLevel {
     Statement(Statement),
-
+    FnDecl(Func),
 }
 
 

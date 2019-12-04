@@ -1,4 +1,5 @@
 pub mod ast;
+pub mod codegen;
 
 #[macro_use] extern crate lalrpop_util;
 

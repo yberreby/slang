@@ -5,6 +5,15 @@ use crate::ast;
 
 grammar;
 
+pub Program: Vec<ast::TopLevel> = {
+  TopLevel+
+}
+
+pub TopLevel: ast::TopLevel = {
+  Func => ast::TopLevel::FnDecl(<>),
+}
+  
+
 
 pub Ident: ast::Ident = {
     r"[a-zA-Z_][0-9A-Za-z_]*" => ast::Ident(<>.to_string()),
