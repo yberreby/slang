@@ -1,6 +1,12 @@
 use crate::ast;
 
 pub fn generate(tls: Vec<ast::TopLevel>) -> String {
+    // Steps:
+    // - generate data section
+    //   - for that, identify string literals and add them to a list
+    //      - for each one, within the data section, add a message directive
+
+
     r####"section .data
 
     message db "Hello, world!", 10
