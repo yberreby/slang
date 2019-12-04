@@ -14,7 +14,20 @@ pub Ident: ast::Ident = {
 Expr: ast::Expr = {
   Num,
   <ident:Ident> => ast::Expr::Ref(ident),
+  FnCall,
 }
+
+
+FnCall: ast::Expr = {
+  <fname:Ident> <args:ArgumentList> => ast::Expr::FnCall(fname, args)
+}
+
+pub ArgumentList: Vec<ast::Expr> = {
+  "()" => Vec::new(),
+  "(" <v:CommaSeparated<Expr>> ")" => v,
+}
+
+
 
 Num: ast::Expr = {
     r"\d+" => {

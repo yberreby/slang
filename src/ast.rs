@@ -4,6 +4,7 @@ pub enum Expr {
     Arith(Op, Box<Expr>, Box<Expr>),
     Unary(UnaryOp, Box<Expr>),
     Num(i32),
+    FnCall(Ident, Vec<Expr>),
 }
 
 
@@ -43,6 +44,7 @@ pub enum Decl {
     Let(Ident, Expr)
 }
 
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub struct Func {
     pub name: Ident,
     pub params: Vec<ParamDecl>,
@@ -50,13 +52,16 @@ pub struct Func {
     pub body: Vec<Statement>
 }
 
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub enum Statement {
     Empty,
     LocalAssignment(Ident, Expr),
 }
 
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 // "type name"
 pub struct ParamDecl {
     pub typ: Ident,
     pub name: Ident,
 }
+
