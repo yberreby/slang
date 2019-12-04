@@ -10,7 +10,7 @@ fn main() -> io::Result<()> {
 
     let toplevel = grammar::ProgramParser::new().parse(&buffer).unwrap();
 
-    codegen::generate(toplevel);
+    println!("{}", codegen::generate(toplevel));
 
     Ok(())
 }
