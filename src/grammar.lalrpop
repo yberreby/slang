@@ -11,7 +11,7 @@ pub Ident: ast::Ident = {
 };
 
 
-Expr: ast::Expr = {
+pub Expr: ast::Expr = {
   Num,
   <ident:Ident> => ast::Expr::Ref(ident),
   FnCall,

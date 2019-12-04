@@ -26,3 +26,9 @@ fn statement_list_empty_stmt() {
 fn statement_list_simple_assignment() {
     grammar::StatementListParser::new().parse("a = 5;").unwrap();
 }
+
+
+#[test]
+fn fn_call_no_args() {
+    grammar::ExprParser::new().parse("die()").unwrap();
+}
