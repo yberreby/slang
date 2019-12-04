@@ -11,3 +11,10 @@ fn trivial_fn_decl() {
 }
 
 
+
+#[test]
+fn statement_list() {
+    grammar::StatementListParser::new().parse("(); ();").unwrap();
+}
+
+

@@ -15,7 +15,10 @@ _start:
     ; length
     mov rdx, 14
     syscall
+    jmp exit_ok
 
+
+exit_ok:
     ; sys_exit code
     mov rax, 60
     ; set exit code to 0

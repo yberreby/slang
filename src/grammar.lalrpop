@@ -50,12 +50,13 @@ ReturnType: ast::Ident = {
   "->" <typ:Ident> => typ
 }
 
-StatementList: Vec<ast::Statement> = {
+pub StatementList: Vec<ast::Statement> = {
   <stmts:(Statement ";")*> => stmts.into_iter().map(|(stmt, s)| stmt).collect()
 }
 
 Statement: ast::Statement = {
-  "()" => ast::Statement::Empty
+  "()" => ast::Statement::Empty,
+  <ident:Ident> => ast::Statement::LocalAssignment(ident),
 }
 
 CommaSeparated<T>: Vec<T> = {

@@ -51,7 +51,8 @@ pub struct Func {
 }
 
 pub enum Statement {
-    Empty
+    Empty,
+    LocalAssignment(Ident),
 }
 
 // "type name"
