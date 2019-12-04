@@ -10,6 +10,11 @@ pub Ident: ast::Ident = {
     r"[a-zA-Z_][0-9A-Za-z_]*" => ast::Ident(<>.to_string()),
 };
 
+
+Expr: ast::Expr = {
+  Num
+}
+
 Num: ast::Expr = {
     r"\d+" => {
         let num = <>.to_string().replace("_", "");
@@ -56,7 +61,7 @@ pub StatementList: Vec<ast::Statement> = {
 
 Statement: ast::Statement = {
   "()" => ast::Statement::Empty,
-  <ident:Ident> => ast::Statement::LocalAssignment(ident),
+  <ident:Ident> "=" <e:Expr> => ast::Statement::LocalAssignment(ident, e),
 }
 
 CommaSeparated<T>: Vec<T> = {
