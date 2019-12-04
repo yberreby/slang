@@ -12,7 +12,8 @@ pub Ident: ast::Ident = {
 
 
 Expr: ast::Expr = {
-  Num
+  Num,
+  <ident:Ident> => ast::Expr::Ref(ident),
 }
 
 Num: ast::Expr = {
