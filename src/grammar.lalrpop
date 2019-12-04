@@ -1,3 +1,5 @@
+// vim: set syntax=rust:
+
 use std::str::FromStr;
 use crate::ast;
 
