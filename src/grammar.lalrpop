@@ -11,9 +11,9 @@ pub Program: Vec<ast::TopLevel> = {
 
 pub TopLevel: ast::TopLevel = {
   Func => ast::TopLevel::FnDecl(<>),
+  <s:Statement> ";" => ast::TopLevel::Statement(s),
 }
   
-
 
 pub Ident: ast::Ident = {
     r"[a-zA-Z_][0-9A-Za-z_]*" => ast::Ident(<>.to_string()),
