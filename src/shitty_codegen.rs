@@ -62,9 +62,14 @@ impl CodeGenerator {
             "r9",
         ];
 
+        let (reg_args, stack_args) = args.split_at(registers.len());
 
-        for (arg, reg) in args[0..7].iter().zip(registers.iter()) {
+        for (arg, reg) in reg_args.iter().zip(registers.iter()) {
             self.mov_to_reg(&Value::Reg(reg.to_string()), arg);
+        }
+
+        for arg in stack_args {
+            self.stack_push(arg);
         }
     }
 
@@ -89,6 +94,10 @@ impl CodeGenerator {
         }
 
         self.asm_buffer.push_str("\n");
+    }
+
+    fn stack_push(&mut self, arg: &Value) {
+        self.write_instr("push", &[arg])
     }
 
 }
