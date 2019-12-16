@@ -1,3 +1,6 @@
+
+extern crate enum_display_derive;
+
 extern crate slang;
 use slang::{ast,codegen,grammar};
 

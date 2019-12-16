@@ -22,5 +22,9 @@ exit_ok:
     ; sys_exit code
     mov rax, 60
     ; set exit code to 0
-    mov rdi, 0
+    mov r8, 7
+    mov r9, 42
+    add r8, r9
+_my_breakpoint:
+    mov rdi, r8
     syscall
