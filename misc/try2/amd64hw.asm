@@ -27,4 +27,6 @@ exit_ok:
     add r8, r9
 _my_breakpoint:
     mov rdi, r8
+    push rdi
+_breakpoint_2:
     syscall
