@@ -23,6 +23,8 @@
 use std::fmt;
 use std::fmt::Write;
 
+use mmap::{MapOption, MemoryMap};
+
 pub enum Value {
     Int(i64),
     // Register.
@@ -50,6 +52,7 @@ impl CodeGenerator {
             asm_buffer: String::new(),
         }
     }
+
 
     pub fn into_string(self) -> String {
         self.asm_buffer
@@ -113,4 +116,25 @@ impl CodeGenerator {
     fn label(&mut self, label: &str) {
         write!(&mut self.asm_buffer, "{}:\n", label).unwrap();
     }
+}
+
+
+unsafe fn reflect(instructions: &[u8]) {
+    let map = MemoryMap::new(
+        instructions.len(),
+        &[
+            MapOption::MapAddr(0 as *mut u8),
+            MapOption::MapOffset(0),
+            MapOption::MapFd(-1),
+            MapOption::MapReadable,
+            MapOption::MapWritable,
+            MapOption::MapExecutable,
+            MapOption::MapNonStandardFlags(libc::MAP_ANON),
+            MapOption::MapNonStandardFlags(libc::MAP_PRIVATE),
+        ],
+    )
+    .unwrap();
+
+    std::ptr::copy(instructions.as_ptr(), map.data(), instructions.len());
+    // How to cast into extern "C" fn() ?
 }

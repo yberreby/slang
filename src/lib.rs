@@ -1,4 +1,5 @@
-
+extern crate mmap;
+extern crate libc;
 
 pub mod ast;
 pub mod codegen;
